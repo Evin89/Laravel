@@ -25,7 +25,7 @@ class Charachter extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'm', 'ws', 'bs', 's', 't', 'w', 'i', 'a', 'ld', 'sv', 'specialRules', 'equipment', 'xp']
+    protected $fillable = ['name', 'm', 'ws', 'bs', 's', 't', 'w', 'i', 'a', 'ld', 'sv', 'specialRules', 'equipment', 'xp'];
 
     
 }
