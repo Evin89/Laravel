@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Mordheim;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class Warband extends Model
      *
      * @var string
      */
-    protected $table = 'Warband';
+    protected $table = 'Warbands';
 
     /**
     * The database primary key value.
@@ -26,8 +26,24 @@ class Warband extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'rating', 'type'
+        'user_id', 'name', 'rating', 'type_id', 'active'
     ];
 
-    
+    /**
+     * Get the User that owns the warband.
+     */
+    public function User()
+    {
+        return $this->belongsTo('Mordheim\User');
+    }
+
+    /**
+     * Get the Type of the warband.
+     */
+    public function Type()
+    {
+        return $this->belongsTo('Mordheim\Type');
+    }
+
+
 }

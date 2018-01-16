@@ -4,14 +4,14 @@ namespace Mordheim;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Charachter extends Model
+class Type extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'Charachter';
+    protected $table = 'Types';
 
     /**
     * The database primary key value.
@@ -25,7 +25,10 @@ class Charachter extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'm', 'ws', 'bs', 's', 't', 'w', 'i', 'a', 'ld', 'sv', 'specialRules', 'equipment', 'xp'];
+    protected $fillable = ['name'];
 
-    
+    public function warbands()
+    {
+        return $this->hasMany('Mordheim\Warband');
+    }
 }

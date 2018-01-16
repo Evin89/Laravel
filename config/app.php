@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Mordheim'),
+    'name' => 'Mordheim Rooster Editor',
 
     /*
     |--------------------------------------------------------------------------
@@ -172,11 +172,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Mordheim\Providers\AppServiceProvider::class,
+        Mordheim\Providers\AuthServiceProvider::class,
+        // Mordheim\Providers\BroadcastServiceProvider::class,
+        Mordheim\Providers\EventServiceProvider::class,
+        Mordheim\Providers\RouteServiceProvider::class,
 
     ],
 

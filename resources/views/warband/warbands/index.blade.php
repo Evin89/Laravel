@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
+            {{--@include('admin.sidebar')--}}
 
             <div class="col-md-9">
                 <div class="panel panel-default">
@@ -30,14 +30,15 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Name</th><th>Rating</th><th>Type</th><th>Actions</th>
+                                        <th>#</th><th>User</th><th>Name</th><th>Rating</th><th>Type</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($warbands as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->rating }}</td><td>{{ $item->type }}</td>
+                                        <td>{{ $item->user->name}}</td>
+                                        <td>{{ $item->name }}</td><td>{{ $item->rating }}</td><td>{{ $item->type->name }}</td>
                                         <td>
                                             <a href="{{ url('/warbands/' . $item->id) }}" title="View warband"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/warbands/' . $item->id . '/edit') }}" title="Edit warband"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
@@ -52,7 +53,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $warbands->appends(['search' => Request::get('search')])->render() !!} </div>
+                            {{--<div class="pagination-wrapper"> {!! $warbands->appends(['search' => Request::get('search')])->render() !!} </div>--}}
                         </div>
 
                     </div>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Mordheim\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Mordheim\Http\Requests;
+use Mordheim\Http\Controllers\Controller;
 
-use App\Character;
+use Mordheim\Character;
 use Illuminate\Http\Request;
 
 class CharactersController extends Controller

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Mordheim\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Mordheim\Http\Requests;
+use Mordheim\Http\Controllers\Controller;
 
-use App\Warband;
+use Mordheim\Warband;
 use Illuminate\Http\Request;
 
 class WarbandsController extends Controller
@@ -17,16 +17,22 @@ class WarbandsController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
+//        $keyword = $request->get('search');
+//        $perPage = 25;
+//
+//        if (!empty($keyword)) {
+//            $warbands = Warband::paginate($perPage);
+//        } else {
+//            $warbands = Warband::paginate($perPage);
+//        }
+//
+//        return view('warband.warbands.index', compact('warbands'));
 
-        if (!empty($keyword)) {
-            $warbands = Warband::paginate($perPage);
-        } else {
-            $warbands = Warband::paginate($perPage);
+        // Getting all companies
+        $warbands = Warband::with('user', 'type')->get()->where('active', true);
+        if (isset($warbands)) {
+            return view('warband/warbands/index', ['warbands' => $warbands]);
         }
-
-        return view('warbands.warbands.index', compact('warbands'));
     }
 
     /**
