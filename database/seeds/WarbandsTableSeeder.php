@@ -15,21 +15,24 @@ class WarbandsTableSeeder extends Seeder
             'user_id' => 1,
             'name' => 'Super Dark Elfs',
             'rating' => 1012,
-            'type' => 'Dark Elfs',
+            'type_id' => 3,
+            'active' => true,
         ]);
 
         DB::table('warbands')->insert([
             'user_id' => 1,
             'name' => 'Marauding Marauders',
             'rating' => 1089,
-            'type' => 'Chaos Marauders',
+            'type_id' => 2,
+            'active' => true,
         ]);
 
         DB::table('warbands')->insert([
             'user_id' => 2,
             'name' => 'Heldhaftige Halflins 2',
             'rating' => 998,
-            'type' => 'Halflings',
+            'type_id' => 1,
+            'active' => true,
         ]);
 
     }
