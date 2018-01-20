@@ -3,13 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
+            {{--@include('admin.sidebar')--}}
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit type #{{ $type->id }}</div>
+                    <div class="panel-heading">Create New warband</div>
                     <div class="panel-body">
-                        <a href="{{ url('/types') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/warbands') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,11 +21,10 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/types/' . $type->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ url('/warbands') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
-                            @include ('types.types.form', ['submitButtonText' => 'Update'])
+                            @include ('warbands.form')
 
                         </form>
 

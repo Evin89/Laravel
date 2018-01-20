@@ -21,7 +21,7 @@ class CreateWarbandsTable extends Migration
             $table->foreign('type_id')->references('id')->on('types');
             $table->string('name');
             $table->string('rating');
-            $table->boolean('active');
+            $table->boolean('active')->default(true);
             });
     }
 

@@ -3,9 +3,16 @@
 namespace Mordheim;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Warband extends Model
 {
+
+    /**
+     * Model is searchable with laravel/scout
+     */
+    use Searchable;
+
     /**
      * The database table used by the model.
      *
@@ -30,7 +37,7 @@ class Warband extends Model
     ];
 
     /**
-     * Get the User that owns the warband.
+     * Get the User that owns the warbands.
      */
     public function User()
     {
@@ -38,12 +45,20 @@ class Warband extends Model
     }
 
     /**
-     * Get the Type of the warband.
+     * Get the Type of the warbands.
      */
     public function Type()
     {
         return $this->belongsTo('Mordheim\Type');
     }
 
+    public function searchableAs()
+    {
+        $array = $this->with('relations')->toArray();
+
+        // Customize array...
+
+        return $array;
+    }
 
 }

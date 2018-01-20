@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+use Mordheim\Warband;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,30 +14,39 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route for home user panel
+Route::get('/home', 'HomeController@index')->middleware('auth');
 
-$uri = 'warband';
-$callback = 'WarbandsController@index';
+// warbands routes
+Route::get('/warbands', 'WarbandController@index');
+Route::get('/warbands/create', 'WarbandController@create')->middleware('auth');
+Route::get('/warbands/{id}', 'WarbandController@show')->where('id', '[0-9]+'); // show with id
+Route::get('/warbands/{id}/edit', 'WarbandController@edit')->where('id', '[0-9]+')->middleware('auth'); // edit with id
+Route::delete('/warbands/{id}', 'WarbandController@destroy')->middleware('auth');
+Route::post('/warbands', 'WarbandController@store')->middleware('auth');
+Route::patch('/warbands/{id}', 'WarbandController@update')->middleware('auth');
+Route::patch('warbands/{id}/up', 'WarbandController@ratingUp')->middleware('auth');
+Route::patch('warbands/{id}/down', 'WarbandController@ratingDown')->middleware('auth');
+Route::get('warbands/search', 'WarbandController@search');
 
-// warband routes
-Route::get('/warbands', 'WarbandsController@index');
-Route::post($uri, $callback);
-Route::put($uri, $callback);
-Route::patch($uri, $callback);
-Route::delete($uri, $callback);
-Route::options($uri, $callback);
+// Types routes
+Route::get('/types', 'TypesController@index');
+Route::get('/types/create', 'TypesController@create')->middleware('auth');
+Route::get('/types/{id}', 'TypesController@show')->where('id', '[0-9]+'); // show with id
+Route::get('/types/{id}/edit', 'TypesController@edit')->where('id', '[0-9]+')->middleware('auth'); // edit with id
+Route::delete('/types/{id}', 'TypesController@destroy')->middleware('auth');
+Route::post('/types', 'TypesController@store')->middleware('auth');
+Route::patch('/types/{id}', 'TypesController@update')->middleware('auth');
 
-// User routes
-Route::get('/users', 'UserController@index'); // show all
-Route::get('/users/create', 'UserController@create'); // create page
-Route::post('users', 'UserController@store'); // store post from create
-Route::get('/users/{id}', 'UserController@show')->where('id', '[0-9]+'); // show with id
-Route::get('/users/{id}/edit', 'UserController@edit')->where('id', '[0-9]+'); // edit with id
-Route::post('/users/{id}', 'UserController@update')->where('id', '[0-9]+'); // store from post with id (update)
-Route::delete('users/{id}', 'UserController@destroy')->where('id', '[0-9]+'); // delete with id
+// User routes for admin. Get get, edit, etc all users.
+Route::get('/users', 'usersController@index'); // show all
+Route::get('/users/create', 'usersController@create')->middleware('auth'); // create page
+Route::post('/users', 'usersController@store')->middleware('auth'); // store post from create
+Route::get('/users/{id}', 'usersController@show')->where('id', '[0-9]+'); // show with id
+Route::get('/users/{id}/edit', 'usersController@edit')->where('id', '[0-9]+')->middleware('auth'); // edit with id
+Route::patch('/users/{id}', 'usersController@update')->where('id', '[0-9]+')->middleware('auth'); // store from post with id (update)
+Route::delete('/users/{id}', 'usersController@destroy')->where('id', '[0-9]+')->middleware('auth'); // delete with id

@@ -36,7 +36,15 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link" href="/warbands">Warbands<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">Users<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/types">Types<span class="sr-only">(current)</span></a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -52,6 +60,21 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="/home">Account</a>
+                                    </li>
+                                    @if( Auth::user())
+                                        @if(Auth::user()->is_admin == true)
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/users">Users<span class="sr-only">(current)</span></a>
+                                            </li>
+                                        @endif
+                                        @if(Auth::user()->is_author == true)
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/types">Types<span class="sr-only">(current)</span></a>
+                                                </li>
+                                        @endif
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

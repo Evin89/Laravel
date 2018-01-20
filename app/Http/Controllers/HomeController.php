@@ -3,6 +3,8 @@
 namespace Mordheim\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mordheim\Warband;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return view('home');
+
+        $user = Auth::user();
+        $id = Auth::id();
+
+
+        $warbands = Warband::with('user', 'type')
+            ->get()
+            ->where('user_id', $id);
+        return view('home', ['warbands' => $warbands], ['user' => $user]);
     }
 }

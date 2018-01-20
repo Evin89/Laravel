@@ -5,10 +5,11 @@ namespace Mordheim\Http\Controllers;
 use Mordheim\Http\Requests;
 use Mordheim\Http\Controllers\Controller;
 
-use Mordheim\Warband;
+use Mordheim;
+use Mordheim\User;
 use Illuminate\Http\Request;
 
-class WarbandsController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,22 +18,12 @@ class WarbandsController extends Controller
      */
     public function index(Request $request)
     {
-//        $keyword = $request->get('search');
-//        $perPage = 25;
-//
-//        if (!empty($keyword)) {
-//            $warbands = Warband::paginate($perPage);
-//        } else {
-//            $warbands = Warband::paginate($perPage);
-//        }
-//
-//        return view('warband.warbands.index', compact('warbands'));
+       return view('admin.index');
+    }
 
-        // Getting all companies
-        $warbands = Warband::with('user', 'type')->get()->where('active', true);
-        if (isset($warbands)) {
-            return view('warband/warbands/index', ['warbands' => $warbands]);
-        }
+    public function getUsers(){
+        $users = User::all();
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -42,7 +33,7 @@ class WarbandsController extends Controller
      */
     public function create()
     {
-        return view('warbands.warbands.create');
+        return view('.create');
     }
 
     /**
@@ -54,12 +45,6 @@ class WarbandsController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        Warband::create($requestData);
-
-        return redirect('warbands/warbands')->with('flash_message', 'Warband added!');
     }
 
     /**
@@ -71,9 +56,6 @@ class WarbandsController extends Controller
      */
     public function show($id)
     {
-        $warband = Warband::findOrFail($id);
-
-        return view('warbands.warbands.show', compact('warband'));
     }
 
     /**
@@ -85,9 +67,6 @@ class WarbandsController extends Controller
      */
     public function edit($id)
     {
-        $warband = Warband::findOrFail($id);
-
-        return view('warbands.warbands.edit', compact('warband'));
     }
 
     /**
@@ -100,13 +79,6 @@ class WarbandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $requestData = $request->all();
-        
-        $warband = Warband::findOrFail($id);
-        $warband->update($requestData);
-
-        return redirect('warbands/warbands')->with('flash_message', 'Warband updated!');
     }
 
     /**
@@ -118,8 +90,5 @@ class WarbandsController extends Controller
      */
     public function destroy($id)
     {
-        Warband::destroy($id);
-
-        return redirect('warbands/warbands')->with('flash_message', 'Warband deleted!');
     }
 }
